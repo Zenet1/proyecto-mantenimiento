@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LoginService {
-  API: string = '/DB_PHP/API/Usuarios.Ruta.php';
-  API_Alumnos: string = '/DB_PHP/API/Alumnos.Ruta.php';
+  API: string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Usuarios.Ruta.php';
+  API_Alumnos: string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Alumnos.Ruta.php';
   API_Facultades: string =
     'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Servicios/Facultades.Servicio.php';
   redirectUrl: string;
