@@ -47,7 +47,7 @@ Thumbs.db
 
 # ENVIRAMENT
 /DB_PHP/.env
-/DB_PHP/API/Clases/.env
+/DB_PHP/Clases/.env
 
 # vendor
 /DB_PHP/vendor/
