@@ -9,3 +9,4 @@ $sql_recFacs = "SELECT * FROM facultades";
 $resultado = $QueryControl->ejecutarConsulta($sql_recFacs, array());
 
 echo json_encode($resultado);
+?>
