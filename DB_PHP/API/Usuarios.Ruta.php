@@ -14,9 +14,10 @@ $UsuariosControl = new Autenticar($QueryControl);
 
 switch ($datos["accion"]) {
     case "validarINET":
-        $UsuariosControl->ValidarCuentaINET((array) $datos["cuenta"]);
+        $UsuariosControl->ValidarCuenta((array) $datos["cuenta"]);
         break;
     case "validarSICAS":
         $UsuariosControl->ValidarCuenta((array) $datos["cuenta"]);
         break;
+    
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("Autenticacion.Query.php");
-include_once("ldap_php_plano.php");
+#include_once("ldap_php_plano.php");
 
 class Autenticar
 {
@@ -21,7 +21,8 @@ class Autenticar
 
         if (sizeof($resultado) !== 0) {
             $this->ObtenerDatosPorRol($resultado[0]);
-            $_SESSION["Conexion"] = $contenido["facultad"];
+            #$_SESSION["Conexion"] = $contenido["facultad"];
+            $_SESSION["Conexion"] = "FMAT";
             $CuentaUsuario = array("Cuenta" => $resultado[0]["Cuenta"], "Rol" => $resultado[0]["Rol"]);
             echo json_encode($CuentaUsuario);
             exit();
