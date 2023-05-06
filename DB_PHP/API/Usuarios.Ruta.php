@@ -1,4 +1,5 @@
 <?php
+
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 include_once("../Clases/Query.Class.php");
@@ -9,6 +10,7 @@ $jsonUsuario = file_get_contents('php://input');
 $datos = (array) json_decode($jsonUsuario);
 
 Conexion::ReconfigurarConexion($datos["cuenta"]->facultad);
+
 $QueryControl = new Query();
 $UsuariosControl = new Autenticar($QueryControl);
 

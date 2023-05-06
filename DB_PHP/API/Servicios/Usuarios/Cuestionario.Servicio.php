@@ -1,4 +1,5 @@
 <?php
+
 class CuestionarioControl
 {
     private Query $objQuery;

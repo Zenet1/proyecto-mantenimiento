@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $EmailPath = realpath(dirname(__FILE__,3)."/Clases/Email.Class.php");
 $QueryPath = realpath(dirname(__FILE__, 3) . "/Clases/Query.Class.php");
 include_once($EmailPath);
@@ -33,6 +33,7 @@ foreach ($Correos as $datos) {
     $asunto = $datos["asunto"];
 
     //$CorreoControl->EnviarCorreo($destinatario, $asunto, $mensaje);
+
     $CorreControl->setArchivo(true);
 
     $QueryControl->ejecutarConsulta($sqlEliminarCorreo, array("idc" => $datos["IDCorreo"]));

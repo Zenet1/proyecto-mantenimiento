@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $FechasPath = realpath(dirname(__FILE__, 3) . "/Clases//Fechas.Class.php");
 $ConexionPath = realpath(dirname(__FILE__, 3) . "/Clases/Conexion.Class.php");
 

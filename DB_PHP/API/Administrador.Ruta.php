@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 header("Access-Control-Allow-Origin:*");
 header("Access-Control-Allow-Credentials: true ");
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
@@ -33,8 +33,9 @@ if (isset($_POST) && sizeof($_POST) > 0) {
     $accion = $datos->accion;
 }
 
-$Conexion = Conexion::ConexionInstacia($_SESSION["Conexion"]);
-Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
+$Conexion = Conexion::ConexionInstacia("FMAT");
+Conexion::ReconfigurarConexion("FMAT");
+
 $Fechas = Fechas::ObtenerInstancia();
 $QueryObj = new Query();
 $PlanesControl = new PlanesControl($QueryObj);

@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
@@ -14,7 +14,9 @@ include_once("../Clases/Email.Class.php");
 $json = file_get_contents('php://input');
 $datos = json_decode($json);
 
-Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
+$Conexion = Conexion::ConexionInstacia("FMAT");
+Conexion::ReconfigurarConexion("FMAT");
+
 $Fechas = Fechas::ObtenerInstancia();
 $QrControl = new GeneradorQr();
 $Query = new Query();

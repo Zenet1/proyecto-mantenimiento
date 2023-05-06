@@ -22,8 +22,9 @@ if (isset($_POST) && sizeof($_POST) > 0) {
     $accion = $datos->accion;
 }
 
-$Conexion = Conexion::ConexionInstacia($_SESSION["Conexion"]);
-Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
+$Conexion = Conexion::ConexionInstacia("FMAT");
+Conexion::ReconfigurarConexion("FMAT");
+
 $QueryObj = new Query();
 $EdificioControl = new Edificio($QueryObj);
 $OficinaControl = new Oficina($QueryObj);
