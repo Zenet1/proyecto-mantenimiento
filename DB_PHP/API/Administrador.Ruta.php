@@ -1,10 +1,5 @@
 <?php
 session_start();
-header("Access-Control-Allow-Origin:*");
-header("Access-Control-Allow-Credentials: true ");
-header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-header("Access-Control-Allow-Headers: X-Custom-Header, Origin, Content-Type , Authorisation , X-Requested-With");
-header("Content-Type: application/json; charset=UTF-8 ");
 
 include_once("Servicios/Administrador/ActualizarPorcentaje.Servicio.php");
 include_once("Servicios/Administrador/ActualizarSalones.Servicio.php");

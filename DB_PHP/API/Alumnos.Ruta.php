@@ -1,7 +1,5 @@
 <?php
 session_start();
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 include_once("Servicios/Alumno/ReservacionesControl.Servicio.php");
 include_once("Servicios/Alumno/AlumnoControl.Servicio.php");

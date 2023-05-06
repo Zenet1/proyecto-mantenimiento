@@ -1,7 +1,4 @@
 <?php
-
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 include_once('Servicios/Escaneador/RegistrarAsistencia.Servicio.php');
 include_once("../Clases/Query.Class.php");
 include_once("../Clases/Conexion.Class.php");
