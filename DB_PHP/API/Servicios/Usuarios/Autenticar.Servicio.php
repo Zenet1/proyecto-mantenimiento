@@ -14,6 +14,10 @@ class Autenticar
         $this->objAunQ = new AutentcacionQuery();
     }
 
+/**
+ * @param array $contenido Contiene la informacion para validar una cuenta de usuario {usuario, contrasena}
+ * @return string Si cuenta con una cuenta, devolvera una objeto en cadena (json_encode), de lo contrario, devulve una cadena con una advertencia
+ */
     public function ValidarCuenta(array $contenido)
     {
         $incognitas = array("ctn" => Sanitizar($contenido["usuario"]), "pss" => Sanitizar($contenido["contrasena"]) );
@@ -31,15 +35,20 @@ class Autenticar
         exit();
     }
 
-    // public function ValidarCuentaINET(array $contenido)
-    // {
+    /**
+     * @param array $contenido
+     * @deprecated 0.0.1
+     * @Annotation La funcion fue deprecada debido a que no cuenta con ningun metodo u API ara validar las cuentas pasadas.
+     */
+     public function ValidarCuentaINET(array $contenido)
+     {
     //     if (validar_ldap($contenido["usuario"], $contenido["contrasena"]) === 1) {
     //         $this->ActualizarDatos($contenido);
     //         $this->ValidarCuenta($contenido);
     //     } else {
     //         $this->ValidarCuenta($contenido);
     //     }
-    // }
+     }
 
     private function ObtenerDatosPorRol(array $datos)
     {
