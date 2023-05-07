@@ -1,4 +1,5 @@
 <?php
+include_once("../Clases/Sanitizador.func.php");
 include_once("../Clases/Query.Class.php");
 include_once("../Clases/Conexion.Class.php");
 include_once("Servicios/Usuarios/Autenticar.Servicio.php");

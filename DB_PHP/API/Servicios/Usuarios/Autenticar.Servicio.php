@@ -1,7 +1,7 @@
 <?php
 session_start();
+include_once("../Clases/Sanitizador.func.php");
 include_once("Autenticacion.Query.php");
-#include_once("ldap_php_plano.php");
 
 class Autenticar
 {
@@ -16,7 +16,7 @@ class Autenticar
 
     public function ValidarCuenta(array $contenido)
     {
-        $incognitas = array("ctn" => $contenido["usuario"], "pss" => $contenido["contrasena"]);
+        $incognitas = array("ctn" => Sanitizar($contenido["usuario"]), "pss" => Sanitizar($contenido["contrasena"]) );
         $resultado = $this->objQuery->ejecutarConsulta($this->objAunQ->VerificarLocal(), $incognitas);
 
         if (sizeof($resultado) !== 0) {
@@ -31,15 +31,15 @@ class Autenticar
         exit();
     }
 
-    public function ValidarCuentaINET(array $contenido)
-    {
-        if (validar_ldap($contenido["usuario"], $contenido["contrasena"]) === 1) {
-            $this->ActualizarDatos($contenido);
-            $this->ValidarCuenta($contenido);
-        } else {
-            $this->ValidarCuenta($contenido);
-        }
-    }
+    // public function ValidarCuentaINET(array $contenido)
+    // {
+    //     if (validar_ldap($contenido["usuario"], $contenido["contrasena"]) === 1) {
+    //         $this->ActualizarDatos($contenido);
+    //         $this->ValidarCuenta($contenido);
+    //     } else {
+    //         $this->ValidarCuenta($contenido);
+    //     }
+    // }
 
     private function ObtenerDatosPorRol(array $datos)
     {

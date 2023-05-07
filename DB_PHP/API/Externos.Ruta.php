@@ -1,4 +1,5 @@
 <?php
+include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Externo/ExternoControl.Servicio.php");
 include_once("Servicios/Externo/ReservacionesExterno.Servicio.php");
 include_once("../Clases/Query.Class.php");

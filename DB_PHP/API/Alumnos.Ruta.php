@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Alumno/ReservacionesControl.Servicio.php");
 include_once("Servicios/Alumno/AlumnoControl.Servicio.php");
 include_once("../Clases/Query.Class.php");
