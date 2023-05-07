@@ -1,11 +1,6 @@
 <?php
-
-header("Access-Control-Allow-Origin:*");
-header("Access-Control-Allow-Credentials: true ");
-header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-header("Access-Control-Allow-Headers: X-Custom-Header, Origin, Content-Type , Authorisation , X-Requested-With");
-header("Content-Type: application/json; charset=UTF-8 ");
-
+session_start();
+include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Administrador/ActualizarPorcentaje.Servicio.php");
 include_once("Servicios/Administrador/ActualizarSalones.Servicio.php");
 include_once("Servicios/Administrador/InsertarUsuario.Servicio.php");
@@ -26,11 +21,11 @@ $datos = null;
 $accion = null;
 
 if (isset($_POST) && sizeof($_POST) > 0) {
-    $accion = $_POST["accion"];
+    $accion = Sanitizar($_POST["accion"]);
 } else {
     $json = file_get_contents('php://input');
     $datos = json_decode($json);
-    $accion = $datos->accion;
+    $accion = Sanitizar($datos->accion);
 }
 
 $Conexion = Conexion::ConexionInstacia("FMAT");

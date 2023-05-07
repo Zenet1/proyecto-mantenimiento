@@ -50,10 +50,12 @@ Thumbs.db
 /DB_PHP/Clases/.env
 
 # vendor
-/DB_PHP/vendor/
+/DB_PHP/vendor
 /DB_PHP/composer.lock
 /DB_PHP/phpqrcode/
 
+DB_PHP/Clases/.env
+/vendor
 /DB_PHP/Clases/vendor/
 /DB_PHP/Clases/composer.lock
 /DB_PHP/Clases/phpqrcode/

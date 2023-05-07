@@ -1,4 +1,6 @@
 <?php
+session_start();
+include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Personal/ReservaPersonal.Servicio.php");
 include_once("../Clases/Query.Class.php");
 include_once("../Clases/Qr.Class.php");

@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Administrador/Pregunta.Servicio.php");
 include_once("Servicios/Usuarios/Cuestionario.Servicio.php");
 include_once("../Clases/Query.Class.php");
