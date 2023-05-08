@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 include_once("Reservaciones.Query.php");
 
 class ReservaControl

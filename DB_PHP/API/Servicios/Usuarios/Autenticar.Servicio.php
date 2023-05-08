@@ -1,8 +1,8 @@
 <?php
 
-session_start();
 include_once("../Clases/Sanitizador.func.php");
 include_once("Autenticacion.Query.php");
+
 
 class Autenticar
 {
@@ -26,8 +26,6 @@ class Autenticar
 
         if (sizeof($resultado) !== 0) {
             $this->ObtenerDatosPorRol($resultado[0]);
-            #$_SESSION["Conexion"] = $contenido["facultad"];
-            #$_SESSION["Conexion"] = "FMAT";
             $CuentaUsuario = array("Cuenta" => $resultado[0]["Cuenta"], "Rol" => $resultado[0]["Rol"]);
             echo json_encode($CuentaUsuario);
             exit();
@@ -70,15 +68,16 @@ class Autenticar
     {
         $incognitas = array("idu" => $datosCuenta["IDUsuario"]);
         $resultado = $this->objQuery->ejecutarConsulta($this->objAunQ->DatosAlumno(), $incognitas);
-
+        
         $nombreCompleto = $resultado[0]["NombreAlumno"] . " ";
         $nombreCompleto .= $resultado[0]["ApellidoPaternoAlumno"] . " ";
         $nombreCompleto .= $resultado[0]["ApellidoMaternoAlumno"];
-
+        
         $_SESSION["Nombre"] = $nombreCompleto;
         $_SESSION["IDAlumno"] = $resultado[0]["IDAlumno"];
         $_SESSION["Matricula"] = $resultado[0]["Matricula"];
         $_SESSION["Correo"] = $resultado[0]["CorreoAlumno"];
+        
     }
 
     private function PersonalDatos(string $sql, array $datosCuenta)
@@ -87,6 +86,7 @@ class Autenticar
         $resultado = $this->objQuery->ejecutarConsulta($sql, $incognitas);
 
         $nombreCompleto = $resultado[0]["NOMBRE"] . " " . $resultado[0]["APP"];
+        
         $_SESSION["Correo"] = $resultado[0]["CORREO"];
         $_SESSION["Nombre"] = $nombreCompleto;
         $_SESSION["ID"] = $resultado[0]["ID"];
