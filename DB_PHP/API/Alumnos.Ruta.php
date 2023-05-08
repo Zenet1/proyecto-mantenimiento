@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Alumno/ReservacionesControl.Servicio.php");
 include_once("Servicios/Alumno/AlumnoControl.Servicio.php");
 include_once("../Clases/Query.Class.php");
@@ -14,7 +13,7 @@ $datos = json_decode($json);
 
 Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
 $Fechas = Fechas::ObtenerInstancia();
-$QrControl = new GeneradorQr();
+$QrControl = new APIQR();
 $Query = new Query();
 
 $ReservacionesControl = new ReservaControl($Query, $Fechas);
