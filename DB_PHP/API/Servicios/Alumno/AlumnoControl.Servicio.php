@@ -11,7 +11,7 @@ class AlumnoControl
         $this->objFecha = $objFecha;
     }
 
-    public function EnviarQRCorreo(array $Materias, GeneradorQr $qr, Conexion $conexion)
+    public function EnviarQRCorreo(array $Materias, Generador $qr, Conexion $conexion)
     {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $sql_insertar = "INSERT INTO correos (correo,nombre,asunto,mensaje,contenidoQR,nombreQR,TipoCorreo)SELECT :cor,:nom,:asu,:mes,:con,:noq,:tip FROM DUAL WHERE NOT EXISTS (SELECT correo,TipoCorreo FROM correos WHERE correo=:cor AND TipoCorreo=:tip) LIMIT 1";

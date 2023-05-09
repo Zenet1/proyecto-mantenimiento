@@ -17,7 +17,7 @@ $Conexion = Conexion::ConexionInstacia("FMAT");
 Conexion::ReconfigurarConexion("FMAT");
 
 $Fechas = Fechas::ObtenerInstancia();
-$QrControl = new GeneradorQr();
+$QrControl = new APIQR();
 $Query = new Query();
 
 $ReservacionesControl = new ReservaControl($Query, $Fechas);
