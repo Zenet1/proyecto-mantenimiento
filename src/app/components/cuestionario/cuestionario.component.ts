@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'src/app/services/cookie/cookie.service';
 import { CuestionarioService } from 'src/app/services/cuestionario/cuestionario.service';
@@ -11,13 +11,13 @@ import { LoginService } from 'src/app/services/login/login.service';
   styleUrls: ['./cuestionario.component.css']
 })
 export class CuestionarioComponent implements OnInit {
-  cuestionario:FormGroup;
+  cuestionario:UntypedFormGroup;
   estaLogueado:boolean;
   pregPrimarias:any;
   pregSecundarias:any;
   banderas:boolean[] = [];
   
-  constructor(private cd:ChangeDetectorRef,private servicioCuestionario:CuestionarioService, private servicioLogin:LoginService, private servicioCookie:CookieService, private formBuilder: FormBuilder, private router:Router) {
+  constructor(private cd:ChangeDetectorRef,private servicioCuestionario:CuestionarioService, private servicioLogin:LoginService, private servicioCookie:CookieService, private formBuilder: UntypedFormBuilder, private router:Router) {
     this.cuestionario = this.formBuilder.group({
       preguntas: this.formBuilder.array([]),
       preguntasSecundarias: this.formBuilder.array([]), 
@@ -82,11 +82,11 @@ export class CuestionarioComponent implements OnInit {
   }
 
   get preguntasForm(){
-    return this.cuestionario.get('preguntas') as FormArray;
+    return this.cuestionario.get('preguntas') as UntypedFormArray;
   }
 
   get pregSecundariasForm(){
-    return this.cuestionario.get('preguntasSecundarias') as FormArray;
+    return this.cuestionario.get('preguntasSecundarias') as UntypedFormArray;
   }
 
   eleccion(event, i){

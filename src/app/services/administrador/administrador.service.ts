@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class AdministradorService {
 
   constructor(private clienteHttp: HttpClient) { }
 
-  obtenerAfectados(afectados:FormGroup){
+  obtenerAfectados(afectados:UntypedFormGroup){
     let datos = JSON.stringify({accion:"obtenerAfectados", contenido: afectados});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
@@ -27,7 +27,7 @@ export class AdministradorService {
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  guardarCapacidadFacultad(datosCapacidad:FormGroup){
+  guardarCapacidadFacultad(datosCapacidad:UntypedFormGroup){
     let datos = JSON.stringify({accion:"actualizarPorcentaje", contenido: datosCapacidad});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
@@ -95,7 +95,7 @@ export class AdministradorService {
     return this.clienteHttp.post<any>(this.API_Administrador, id);
   }
 
-  restaurarBD(datos:FormGroup){
+  restaurarBD(datos:UntypedFormGroup){
     const formData = new FormData();
     formData.append('archivo', datos.get('archivo').value);
     formData.append('accion', 'restaurarSICAS');

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador/administrador.service';
 
 @Component({
@@ -8,11 +8,11 @@ import { AdministradorService } from 'src/app/services/administrador/administrad
   styleUrls: ['./oficinas-externo.component.css']
 })
 export class OficinasExternoComponent implements OnInit {
-  formOficina:FormGroup;
+  formOficina:UntypedFormGroup;
   oficinas:any;
   edificios:any;
 
-  constructor(private servicioAdmin:AdministradorService, private formBuilder:FormBuilder) { }
+  constructor(private servicioAdmin:AdministradorService, private formBuilder:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.formOficina = this.formBuilder.group({

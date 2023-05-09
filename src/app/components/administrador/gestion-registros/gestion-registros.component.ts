@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador/administrador.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { AdministradorService } from 'src/app/services/administrador/administrad
 })
 export class GestionRegistrosComponent implements OnInit {
 
-  formularioRestaurar:FormGroup;
+  formularioRestaurar:UntypedFormGroup;
   siArchivoRespaldado:boolean = false;
 
-  constructor(private servicioAdmin:AdministradorService, private datepipe:DatePipe, private formBuilder:FormBuilder) { }
+  constructor(private servicioAdmin:AdministradorService, private datepipe:DatePipe, private formBuilder:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.formularioRestaurar = this.formBuilder.group({

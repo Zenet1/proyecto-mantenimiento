@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
@@ -19,7 +19,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  public iniciarSesion(datosCuenta: FormGroup, accionRol: any) {
+  public iniciarSesion(datosCuenta: UntypedFormGroup, accionRol: any) {
     var datos = JSON.stringify({ accion: accionRol, cuenta: datosCuenta });
     this.httpClient.post<any>(this.API_Usuarios, datos).subscribe((Users) => {
       console.log(JSON.stringify(Users));

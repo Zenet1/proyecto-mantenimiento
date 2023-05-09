@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador/administrador.service';
 
 @Component({
@@ -9,12 +9,12 @@ import { AdministradorService } from 'src/app/services/administrador/administrad
 })
 export class AlertaComponent implements OnInit {
 
-  formularioAlerta:FormGroup;
+  formularioAlerta:UntypedFormGroup;
   numAfectados:any;
   gruposAfectados:any;
   siAlertaEnviada:boolean = false;
 
-  constructor(private servicioAdmin:AdministradorService, private formBuilder:FormBuilder) { }
+  constructor(private servicioAdmin:AdministradorService, private formBuilder:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.formularioAlerta = this.formBuilder.group({

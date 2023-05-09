@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador/administrador.service';
 
 @Component({
@@ -8,11 +8,11 @@ import { AdministradorService } from 'src/app/services/administrador/administrad
   styleUrls: ['./captura-preguntas.component.css']
 })
 export class CapturaPreguntasComponent implements OnInit {
-  formPregunta:FormGroup;
+  formPregunta:UntypedFormGroup;
   preguntas:any;
   esSecundaria:boolean = false;
 
-  constructor(private servicioAdmin:AdministradorService, private formBuilder:FormBuilder) { }
+  constructor(private servicioAdmin:AdministradorService, private formBuilder:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.formPregunta = this.formBuilder.group({

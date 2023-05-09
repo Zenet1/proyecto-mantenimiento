@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador/administrador.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AdministradorService } from 'src/app/services/administrador/administrad
   styleUrls: ['./estadisticas.component.css']
 })
 export class EstadisticasComponent implements OnInit {
-  formEstadisticas:FormGroup;
+  formEstadisticas:UntypedFormGroup;
   programas:any;
   estadisticas:any;
   tipoEstadistica:string;
@@ -50,7 +50,7 @@ export class EstadisticasComponent implements OnInit {
   ];
   schemeType: string = 'ordinal';
 
-  constructor(private servicioAdmin:AdministradorService, private formBuilder:FormBuilder) { }
+  constructor(private servicioAdmin:AdministradorService, private formBuilder:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.formEstadisticas = this.formBuilder.group({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador/administrador.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { AdministradorService } from 'src/app/services/administrador/administrad
   styleUrls: ['./gestionar-sicei.component.css']
 })
 export class GestionarSiceiComponent implements OnInit {
-  formularioBDSicei:FormGroup;
-  formActualizarDatos:FormGroup;
-  constructor(private servicioAdmin:AdministradorService, private formBuilder: FormBuilder) { }
+  formularioBDSicei:UntypedFormGroup;
+  formActualizarDatos:UntypedFormGroup;
+  constructor(private servicioAdmin:AdministradorService, private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.formularioBDSicei = this.formBuilder.group({

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'src/app/services/cookie/cookie.service';
 import { ExternoService } from 'src/app/services/externo/externo.service';
@@ -12,9 +12,9 @@ import { ExternoService } from 'src/app/services/externo/externo.service';
 })
 export class AsistenciaExternoComponent implements OnInit {
   listaOficinas:any;
-  formularioAsistenciaExterno:FormGroup;
+  formularioAsistenciaExterno:UntypedFormGroup;
 
-  constructor(private datepipe:DatePipe, private servicioExterno:ExternoService, private servicioCookie:CookieService, private formBuilder:FormBuilder, private router:Router) { }
+  constructor(private datepipe:DatePipe, private servicioExterno:ExternoService, private servicioCookie:CookieService, private formBuilder:UntypedFormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     if(!this.servicioCookie.checkCookie("cuestionarioContestado")){
@@ -39,7 +39,7 @@ export class AsistenciaExternoComponent implements OnInit {
   }
 
   get oficinasForm(){
-    return this.formularioAsistenciaExterno.get('oficinas') as FormArray;
+    return this.formularioAsistenciaExterno.get('oficinas') as UntypedFormArray;
   }
 
   get fechaAsistencia(){

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'src/app/services/cookie/cookie.service';
 import { ExternoService } from 'src/app/services/externo/externo.service';
@@ -12,10 +12,10 @@ import { ExternoService } from 'src/app/services/externo/externo.service';
 })
 export class RegistroExternoComponent implements OnInit {
 
-  formExterno:FormGroup;
+  formExterno:UntypedFormGroup;
   facultades:any;
 
-  constructor(private servicioExterno:ExternoService, /*private servicioLogin:LoginService, */private servicioCookie:CookieService, private formBuilder:FormBuilder, private router:Router) { }
+  constructor(private servicioExterno:ExternoService, /*private servicioLogin:LoginService, */private servicioCookie:CookieService, private formBuilder:UntypedFormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     this.formExterno = this.formBuilder.group({

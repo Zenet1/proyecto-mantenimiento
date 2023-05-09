@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador/administrador.service';
 
 @Component({
@@ -8,10 +8,10 @@ import { AdministradorService } from 'src/app/services/administrador/administrad
   styleUrls: ['./capacidad-facultad.component.css']
 })
 export class CapacidadFacultadComponent implements OnInit {
-  formularioCapacidad:FormGroup;
+  formularioCapacidad:UntypedFormGroup;
   capacidadActual:any;
 
-  constructor(private servicioAdmin: AdministradorService, private formBuilder:FormBuilder) { }
+  constructor(private servicioAdmin: AdministradorService, private formBuilder:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.formularioCapacidad = this.formBuilder.group({
