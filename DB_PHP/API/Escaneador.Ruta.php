@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin:*");
 include_once("../Clases/Sanitizador.func.php");
 include_once('Servicios/Escaneador/RegistrarAsistencia.Servicio.php');
 include_once("../Clases/Query.Class.php");

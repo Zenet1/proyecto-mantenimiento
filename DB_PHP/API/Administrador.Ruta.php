@@ -1,5 +1,6 @@
 <?php
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+header("Access-Control-Allow-Origin:*");
 include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Administrador/ActualizarPorcentaje.Servicio.php");
 include_once("Servicios/Administrador/ActualizarSalones.Servicio.php");

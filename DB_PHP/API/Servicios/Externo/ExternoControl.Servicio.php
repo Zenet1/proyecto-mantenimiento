@@ -103,6 +103,7 @@ class ExternoControl
 
     private function recuperarVariablesSesion()
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $IDExterno = $_SESSION["IDExterno"];
         $correoExterno = $_SESSION["Correo"];
         $nombreExterno = $_SESSION["Nombre"] . " " . $_SESSION["ApellidosExterno"];
