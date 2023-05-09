@@ -18,6 +18,12 @@ class ExternoControl
 
             $objCorreo = new CorreoManejador();
             $datosSesion = $this->recuperarVariablesSesion();
+
+if(!CorreoValidacion($datosSesion["correoExterno"])){
+    header("HTTP/1.0 404 Correo invalido");
+    return;
+}
+
             $datosDestinatario = array($datosSesion["correoExterno"] => $datosSesion["nombreExterno"]);
 
             $contenidoCorreo = $this->generarContenidoCorreo($datosSesion["nombreExterno"], $IDOficinas, $datosSesion["fechaReservada"]);
