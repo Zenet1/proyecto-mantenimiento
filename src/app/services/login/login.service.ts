@@ -8,8 +8,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LoginService {
-  API: string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Usuarios.Ruta.php';
-  API_Alumnos: string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Alumnos.Ruta.php';
+  API: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Usuarios.Ruta.php';
+  API_Alumnos: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Alumnos.Ruta.php';
   API_Facultades: string =
     'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Servicios/Facultades.Servicio.php';
   redirectUrl: string;
@@ -24,7 +26,11 @@ export class LoginService {
       if (Users != null && Users != 'Sin cuenta valida') {
         var token = JSON.stringify(Users);
         if (Users.Rol == 'Alumno') {
-          var accion = JSON.stringify({ accion: 'comprobarSuspension' });
+          var accion = JSON.stringify({
+            accion: 'comprobarSuspension',
+            cuenta: Users.Cuenta,
+            conexion: Users.Conexion,
+          });
           this.httpClient
             .post<any>(this.API_Alumnos, accion)
             .subscribe((respuesta) => {
@@ -69,6 +75,10 @@ export class LoginService {
   obtenerFacultades() {
     let datos = JSON.stringify({ accion: 'recuperarFacultades' });
     return this.httpClient.post<any>(this.API_Facultades, datos);
+  }
+
+  obtenerConexion() {
+    return 'FMAT';
   }
 
   getUsuario() {

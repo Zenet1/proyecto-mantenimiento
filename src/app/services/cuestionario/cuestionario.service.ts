@@ -3,21 +3,24 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CuestionarioService {
+  API_Preguntas: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Cuestionario.Ruta.php';
 
-  API_Preguntas:string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Cuestionario.Ruta.php';
+  constructor(private clienteHttp: HttpClient) {}
 
-  constructor(private clienteHttp: HttpClient) { }
-
-  obtenerPreguntas(){
-    let datos  = JSON.stringify({accion: "recuperarPreguntas"});
+  obtenerPreguntas(usuario: string | null) {
+    let datos = JSON.stringify({
+      accion: 'recuperarPreguntas',
+      usuario: usuario,
+    });
     return this.clienteHttp.post(this.API_Preguntas, datos);
   }
 
-  rechazado():Observable<any>{
-    let datos  = JSON.stringify({accion: "enviarCorreo"});
+  rechazado(): Observable<any> {
+    let datos = JSON.stringify({ accion: 'enviarCorreo' });
     return this.clienteHttp.post<any>(this.API_Preguntas, datos);
   }
 }

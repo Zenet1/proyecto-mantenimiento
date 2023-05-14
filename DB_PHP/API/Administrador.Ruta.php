@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Administrador/ActualizarPorcentaje.Servicio.php");
 include_once("Servicios/Administrador/ActualizarSalones.Servicio.php");
@@ -28,6 +28,11 @@ try {
         $datos = json_decode($json);
         $accion = Sanitizar($datos->accion);
     }
+
+    session_id($datos->cuenta);
+    session_start();
+
+
     
     $Conexion = Conexion::ConexionInstacia($_SESSION["Conexion"]);
     Conexion::ReconfigurarConexion($_SESSION["Conexion"]);

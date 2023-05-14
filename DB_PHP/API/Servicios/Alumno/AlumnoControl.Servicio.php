@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 class AlumnoControl
 {
     private Query $objQuery;

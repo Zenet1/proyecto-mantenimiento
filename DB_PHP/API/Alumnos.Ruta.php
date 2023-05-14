@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once("Servicios/Alumno/ReservacionesControl.Servicio.php");
 include_once("Servicios/Alumno/AlumnoControl.Servicio.php");
 include_once("../Clases/Query.Class.php");
@@ -10,6 +9,10 @@ include_once("../Clases/Email.Class.php");
 
 $json = file_get_contents('php://input');
 $datos = json_decode($json);
+
+session_id($datos->cuenta);
+session_start();
+
 
 Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
 $Fechas = Fechas::ObtenerInstancia();

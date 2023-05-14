@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once("../Clases/Sanitizador.func.php");
 include_once("Autenticacion.Query.php");
 
@@ -20,14 +19,18 @@ class Autenticar
  */
     public function ValidarCuenta(array $contenido)
     {
+        session_id($contenido["usuario"]);
+        session_start();
+
         $incognitas = array("ctn" => Sanitizar($contenido["usuario"]), "pss" => Sanitizar($contenido["contrasena"]) );
         $resultado = $this->objQuery->ejecutarConsulta($this->objAunQ->VerificarLocal(), $incognitas);
 
+        //print_r($contenido);
         if (sizeof($resultado) !== 0) {
             $this->ObtenerDatosPorRol($resultado[0]);
-            #$_SESSION["Conexion"] = $contenido["facultad"];
-            $_SESSION["Conexion"] = "FMAT";
-            $CuentaUsuario = array("Cuenta" => $resultado[0]["Cuenta"], "Rol" => $resultado[0]["Rol"]);
+            $_SESSION["Conexion"] = $contenido["facultad"];
+            
+            $CuentaUsuario = array("Cuenta" => $resultado[0]["Cuenta"], "Rol" => $resultado[0]["Rol"], "Conexion" => $contenido["facultad"]);
             echo json_encode($CuentaUsuario);
             exit();
         }
@@ -86,9 +89,9 @@ class Autenticar
         $resultado = $this->objQuery->ejecutarConsulta($sql, $incognitas);
 
         $nombreCompleto = $resultado[0]["NOMBRE"] . " " . $resultado[0]["APP"];
-        $_SESSION["Correo"] = $resultado[0]["CORREO"];
-        $_SESSION["Nombre"] = $nombreCompleto;
-        $_SESSION["ID"] = $resultado[0]["ID"];
+        $_SESSION["correo"] = $resultado[0]["CORREO"];
+        $_SESSION["nombre"] = $nombreCompleto;
+        $_SESSION["Id"] = $resultado[0]["ID"];
     }
 
     private function ActualizarDatos(array $contenido)

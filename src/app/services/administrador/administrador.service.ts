@@ -1,155 +1,200 @@
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdministradorService {
-  
-  API_Administrador:string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Administrador.Ruta.php';
-  API_Oficinas:string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Oficinas.Ruta.php';
+  API_Administrador: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Administrador.Ruta.php';
+  API_Oficinas: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Oficinas.Ruta.php';
+  cuenta: string;
 
-  constructor(private clienteHttp: HttpClient) { }
+  constructor(private clienteHttp: HttpClient, login: LoginService) {
+    this.cuenta = login.getUsuario();
+  }
 
-  obtenerAfectados(afectados:FormGroup){
-    let datos = JSON.stringify({accion:"obtenerAfectados", contenido: afectados});
+  obtenerAfectados(afectados: FormGroup) {
+    let datos = JSON.stringify({
+      accion: 'obtenerAfectados',
+      contenido: afectados,
+    });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  alertar(grupos:any, usuarios:any){
-    let datos = JSON.stringify({accion:"alertaCOVID", contenido: grupos, usuarios});
+  alertar(grupos: any, usuarios: any) {
+    let datos = JSON.stringify({
+      accion: 'alertaCOVID',
+      contenido: grupos,
+      usuarios,
+    });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  obtenerCapacidadActual(){
-    let datos = JSON.stringify({accion: "recuperarPorcentaje"});
+  obtenerCapacidadActual() {
+    let datos = JSON.stringify({
+      accion: 'recuperarPorcentaje',
+      cuenta: this.cuenta,
+    });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  guardarCapacidadFacultad(datosCapacidad:FormGroup){
-    let datos = JSON.stringify({accion:"actualizarPorcentaje", contenido: datosCapacidad});
+  guardarCapacidadFacultad(datosCapacidad: FormGroup) {
+    let datos = JSON.stringify({
+      accion: 'actualizarPorcentaje',
+      contenido: datosCapacidad,
+    });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  subirBDSicei(datos:any){
+  subirBDSicei(datos: any) {
     const formData = new FormData();
-    let numArchivos:number = 0;
+    let numArchivos: number = 0;
     for (let index = 0; index < datos.archivos.length; index++) {
       numArchivos++;
       formData.append('archivo' + [index], datos.archivos[index]);
     }
-    formData.append('numArchivos', numArchivos + "");
-    formData.append('accion', "restaurarSICEI");
+    formData.append('numArchivos', numArchivos + '');
+    formData.append('accion', 'restaurarSICEI');
     return this.clienteHttp.post<any>(this.API_Administrador, formData);
   }
 
-  actualizarDatos(datos:any){
+  actualizarDatos(datos: any) {
     const formData = new FormData();
-    let numArchivos:number = 0;
+    let numArchivos: number = 0;
     for (let index = 0; index < datos.archivosActualizar.length; index++) {
       numArchivos++;
       formData.append('archivo' + [index], datos.archivosActualizar[index]);
     }
-    formData.append('numArchivos', numArchivos + "");
-    formData.append('accion', "actualizarSICEI");
+    formData.append('numArchivos', numArchivos + '');
+    formData.append('accion', 'actualizarSICEI');
     return this.clienteHttp.post<any>(this.API_Administrador, formData);
   }
 
-  eliminarDatos(){
-    let datos = JSON.stringify({accion:"eliminarSICEI"});
+  eliminarDatos() {
+    let datos = JSON.stringify({ accion: 'eliminarSICEI' });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  obtenerEdificios(){
-    let datos = JSON.stringify({accion: "recuperarEdificios"});
+  obtenerEdificios() {
+    let datos = JSON.stringify({ accion: 'recuperarEdificios' });
     return this.clienteHttp.post(this.API_Oficinas, datos);
   }
 
-  obtenerOficinas(){
-    let datos = JSON.stringify({accion: "recuperarOficinas"});
+  obtenerOficinas() {
+    let datos = JSON.stringify({ accion: 'recuperarOficinas' });
     return this.clienteHttp.post(this.API_Oficinas, datos);
   }
 
-  guardarOficina(datosOficina:any){
-    let datos = JSON.stringify({accion: "agregarOficina", contenido: datosOficina});
+  guardarOficina(datosOficina: any) {
+    let datos = JSON.stringify({
+      accion: 'agregarOficina',
+      contenido: datosOficina,
+    });
     return this.clienteHttp.post<any>(this.API_Oficinas, datos);
   }
 
-  eliminarOficina(idOficina:any){
-    let datos = JSON.stringify({accion: "eliminarOficina", contenido: idOficina});
+  eliminarOficina(idOficina: any) {
+    let datos = JSON.stringify({
+      accion: 'eliminarOficina',
+      contenido: idOficina,
+    });
     return this.clienteHttp.post<any>(this.API_Oficinas, datos);
   }
 
-  obtenerAulas(){
-    let datos = JSON.stringify({accion:"recuperarSalones"});
+  obtenerAulas() {
+    let datos = JSON.stringify({ accion: 'recuperarSalones' });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  guardarAula(datosAula:any){
-    let datos = JSON.stringify({accion:"actualizarSalon", contenido: datosAula});
+  guardarAula(datosAula: any) {
+    let datos = JSON.stringify({
+      accion: 'actualizarSalon',
+      contenido: datosAula,
+    });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  eliminarAula(id:any){
+  eliminarAula(id: any) {
     return this.clienteHttp.post<any>(this.API_Administrador, id);
   }
 
-  restaurarBD(datos:FormGroup){
+  restaurarBD(datos: FormGroup) {
     const formData = new FormData();
     formData.append('archivo', datos.get('archivo').value);
     formData.append('accion', 'restaurarSICAS');
     return this.clienteHttp.post<any>(this.API_Administrador, formData);
   }
 
-  eliminarBD(){
-    let datos = JSON.stringify({accion:"eliminarSICAS"});
+  eliminarBD() {
+    let datos = JSON.stringify({ accion: 'eliminarSICAS' });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  respaldarBD(){
-    const someHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    let datos = JSON.stringify({accion:"respaldarSICAS"});
-    return this.clienteHttp.post<any>(this.API_Administrador, datos, {headers:someHeaders, responseType: 'blob' as 'json'});
+  respaldarBD() {
+    const someHeaders = new HttpHeaders().set(
+      'Content-Type',
+      'application/json'
+    );
+    let datos = JSON.stringify({ accion: 'respaldarSICAS' });
+    return this.clienteHttp.post<any>(this.API_Administrador, datos, {
+      headers: someHeaders,
+      responseType: 'blob' as 'json',
+    });
   }
 
-  obtenerProgramas(){
-    let datos = JSON.stringify({accion:"recuperarPlanes"});
-    return this.clienteHttp.post<any>(this.API_Administrador,datos);
+  obtenerProgramas() {
+    let datos = JSON.stringify({ accion: 'recuperarPlanes' });
+    return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  obtenerEstadisticas(filtros:any){
+  obtenerEstadisticas(filtros: any) {
     let tipo = filtros.tipo;
-    if(tipo == "asistenciapersonal"){
-      var datos = JSON.stringify({accion:"recuperarEstadisticaPersonal", contenido: filtros});
+    if (tipo == 'asistenciapersonal') {
+      var datos = JSON.stringify({
+        accion: 'recuperarEstadisticaPersonal',
+        contenido: filtros,
+      });
     } else {
-      var datos = JSON.stringify({accion:"recuperarEstadisticaAlumno", contenido: filtros});
+      var datos = JSON.stringify({
+        accion: 'recuperarEstadisticaAlumno',
+        contenido: filtros,
+      });
     }
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  obtenerRoles(){
-    let datos = JSON.stringify({accion:"recuperarRoles"});
+  obtenerRoles() {
+    let datos = JSON.stringify({ accion: 'recuperarRoles' });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  registrarUsuario(datosUsuario:any){
-    let datos = JSON.stringify({accion:"agregarUsuario", contenido: datosUsuario});
+  registrarUsuario(datosUsuario: any) {
+    let datos = JSON.stringify({
+      accion: 'agregarUsuario',
+      contenido: datosUsuario,
+    });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  obtenerPreguntas(){
-    let datos = JSON.stringify({accion:"recuperarPreguntas"});
+  obtenerPreguntas() {
+    let datos = JSON.stringify({ accion: 'recuperarPreguntas' });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  guardarPreguntas(pregunta:any){
-    let datos = JSON.stringify({accion:"agregarPregunta", contenido:pregunta});
+  guardarPreguntas(pregunta: any) {
+    let datos = JSON.stringify({
+      accion: 'agregarPregunta',
+      contenido: pregunta,
+    });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
-  eliminarPregunta(id:any){
-    let datos = JSON.stringify({accion:"eliminarPregunta", contenido: id});
+  eliminarPregunta(id: any) {
+    let datos = JSON.stringify({ accion: 'eliminarPregunta', contenido: id });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 }
