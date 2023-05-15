@@ -53,9 +53,11 @@ try {
             $NUsuarios->InsertarNuevoTrabajador((array)$datos->contenido);
             break;
         case "recuperarPorcentaje":
+            
             $PorcentajeControl->RecuperarPorcentaje();
             break;
         case "actualizarPorcentaje":
+            
             $PorcentajeControl->ActualizarPorcentaje((array) $datos->contenido);
             break;
         case "recuperarSalones":

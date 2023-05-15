@@ -19,6 +19,7 @@ export class AlumnoService {
     let datos = JSON.stringify({
       accion: 'insertarReservas',
       contenido: datosClases,
+      cuenta: this.cuenta,
     });
     return this.clienteHttp.post<any>(this.API_Alumnos, datos);
   }

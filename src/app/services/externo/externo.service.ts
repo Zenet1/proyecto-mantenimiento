@@ -3,38 +3,48 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ExternoService {
-  API_Oficinas:string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Oficinas.Ruta.php';
-  API_RegistroExterno:string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/RegistroExternos.Ruta.php';
-  API_Externo:string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Externos.Ruta.php';
+  API_Oficinas: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Oficinas.Ruta.php';
+  API_RegistroExterno: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/RegistroExternos.Ruta.php';
+  API_Externo: string =
+    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Externos.Ruta.php';
 
-  constructor(private clienteHttp: HttpClient) { }
+  constructor(private clienteHttp: HttpClient) {}
 
-  enviarAsistencia(oficinas:any, fecha:any):Observable<any>{
-    let datos = JSON.stringify({accion: "insertarReservaExterno", oficinas: oficinas, fecha: fecha});
+  enviarAsistencia(oficinas: any, fecha: any): Observable<any> {
+    let datos = JSON.stringify({
+      accion: 'insertarReservaExterno',
+      oficinas: oficinas,
+      fecha: fecha,
+    });
     return this.clienteHttp.post<any>(this.API_Externo, datos);
   }
 
-  enviarCorreo(oficinas:any, fecha:any):Observable<any>{
-    let datos = JSON.stringify({accion:"enviarQRExterno", oficinas: oficinas, fecha: fecha});
+  enviarCorreo(oficinas: any, fecha: any): Observable<any> {
+    let datos = JSON.stringify({
+      accion: 'enviarQRExterno',
+      oficinas: oficinas,
+      fecha: fecha,
+    });
     return this.clienteHttp.post<any>(this.API_Externo, datos);
   }
 
-  obtenerOficinas(){
-    let datos = JSON.stringify({accion:"recuperarOficinas"});
+  obtenerOficinas() {
+    let datos = JSON.stringify({ accion: 'recuperarOficinas' });
     return this.clienteHttp.post<any>(this.API_Oficinas, datos);
   }
 
-  guardarExterno(datosExterno:any):Observable<any>{
-    let datos = JSON.stringify({contenido: datosExterno});
+  guardarExterno(datosExterno: any): Observable<any> {
+    let datos = JSON.stringify({ contenido: datosExterno });
     return this.clienteHttp.post<any>(this.API_RegistroExterno, datos);
   }
 
-  fechaActual(){
-    let datos = JSON.stringify({accion:"FechaActual"});
+  fechaActual() {
+    let datos = JSON.stringify({ accion: 'FechaActual' });
     return this.clienteHttp.post<any>(this.API_Externo, datos);
   }
 }

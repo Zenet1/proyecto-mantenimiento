@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Externo/ExternoControl.Servicio.php");
 include_once("Servicios/Externo/ReservacionesExterno.Servicio.php");
@@ -10,8 +11,9 @@ include_once("../Clases/Email.Class.php");
 
 $json = file_get_contents('php://input');
 $datos = json_decode($json);
-session_start();
-Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
+
+$conexion = isset($_SESSION["Conexion"]) ? $_SESSION["Conexion"] : "FMAT";
+Conexion::ReconfigurarConexion($conexion);
 $QueryObj = new Query();
 $QrControl = new GeneradorQr();
 $Fechas = Fechas::ObtenerInstancia();

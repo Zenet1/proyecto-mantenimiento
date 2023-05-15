@@ -11,7 +11,7 @@ export class CuestionarioService {
 
   constructor(private clienteHttp: HttpClient) {}
 
-  obtenerPreguntas(usuario: string | null) {
+  obtenerPreguntas(usuario: string = 'FMAT') {
     let datos = JSON.stringify({
       accion: 'recuperarPreguntas',
       usuario: usuario,

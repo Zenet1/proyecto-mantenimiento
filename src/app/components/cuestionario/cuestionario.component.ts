@@ -66,23 +66,21 @@ export class CuestionarioComponent implements OnInit {
   }
 
   obtenerPreguntas() {
-    this.servicioCuestionario
-      .obtenerPreguntas(this.servicioLogin.getUsuario())
-      .subscribe((respuesta: any) => {
-        this.pregPrimarias = respuesta.primarias;
-        this.pregSecundarias = respuesta.secundarias;
-        this.agregarCamposPreguntas(
-          this.pregPrimarias.length,
-          this.preguntasForm
-        );
-        this.agregarCamposPreguntas(
-          this.pregSecundarias.length,
-          this.pregSecundariasForm
-        );
-        for (let index = 0; index < this.pregPrimarias.length; index++) {
-          this.banderas.push(false);
-        }
-      });
+    this.servicioCuestionario.obtenerPreguntas().subscribe((respuesta: any) => {
+      this.pregPrimarias = respuesta.primarias;
+      this.pregSecundarias = respuesta.secundarias;
+      this.agregarCamposPreguntas(
+        this.pregPrimarias.length,
+        this.preguntasForm
+      );
+      this.agregarCamposPreguntas(
+        this.pregSecundarias.length,
+        this.pregSecundariasForm
+      );
+      for (let index = 0; index < this.pregPrimarias.length; index++) {
+        this.banderas.push(false);
+      }
+    });
   }
 
   agregarCamposPreguntas(cantidad: any, campo: any) {
