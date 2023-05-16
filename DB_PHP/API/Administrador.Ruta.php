@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin:*");
 include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Administrador/ActualizarPorcentaje.Servicio.php");
 include_once("Servicios/Administrador/ActualizarSalones.Servicio.php");
@@ -28,9 +29,10 @@ try {
         $accion = Sanitizar($datos->accion);
     }
 
+if(session_status() !== PHP_SESSION_ACTIVE){
     session_id($datos->cuenta);
     session_start();
-
+}
 
     
     $Conexion = Conexion::ConexionInstacia($_SESSION["Conexion"]);
@@ -119,11 +121,11 @@ try {
     }
     
 } catch (InvalidArgumentException $e) {
-    header("HTTP/1.0 404 Route Not Found");
-    echo 'Algo no fue bien '. $e->getMessage();
+    //header("HTTP/1.0 404 Route Not Found");
+    //echo 'Algo no fue bien '. $e->getMessage();
 }catch(Exception $e){
-    header("HTTP/1.0 404 Route Not Found");
-    echo 'Algo no fue bien';
+    //header("HTTP/1.0 404 Route Not Found");
+    //echo 'Algo no fue bien';
 }
 
 

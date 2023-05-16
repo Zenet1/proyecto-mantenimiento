@@ -21,6 +21,7 @@ export class AdministradorService {
     let datos = JSON.stringify({
       accion: 'obtenerAfectados',
       contenido: afectados,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
@@ -30,6 +31,7 @@ export class AdministradorService {
       accion: 'alertaCOVID',
       contenido: grupos,
       usuarios,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
@@ -46,6 +48,7 @@ export class AdministradorService {
     let datos = JSON.stringify({
       accion: 'actualizarPorcentaje',
       contenido: datosCapacidad,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
@@ -75,17 +78,17 @@ export class AdministradorService {
   }
 
   eliminarDatos() {
-    let datos = JSON.stringify({ accion: 'eliminarSICEI' });
+    let datos = JSON.stringify({ accion: 'eliminarSICEI', cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
   obtenerEdificios() {
-    let datos = JSON.stringify({ accion: 'recuperarEdificios' });
+    let datos = JSON.stringify({ accion: 'recuperarEdificios', cuenta: this.cuenta});
     return this.clienteHttp.post(this.API_Oficinas, datos);
   }
 
   obtenerOficinas() {
-    let datos = JSON.stringify({ accion: 'recuperarOficinas' });
+    let datos = JSON.stringify({ accion: 'recuperarOficinas', cuenta: this.cuenta});
     return this.clienteHttp.post(this.API_Oficinas, datos);
   }
 
@@ -93,6 +96,7 @@ export class AdministradorService {
     let datos = JSON.stringify({
       accion: 'agregarOficina',
       contenido: datosOficina,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Oficinas, datos);
   }
@@ -101,12 +105,13 @@ export class AdministradorService {
     let datos = JSON.stringify({
       accion: 'eliminarOficina',
       contenido: idOficina,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Oficinas, datos);
   }
 
   obtenerAulas() {
-    let datos = JSON.stringify({ accion: 'recuperarSalones' });
+    let datos = JSON.stringify({ accion: 'recuperarSalones', cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
@@ -114,6 +119,7 @@ export class AdministradorService {
     let datos = JSON.stringify({
       accion: 'actualizarSalon',
       contenido: datosAula,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
@@ -130,7 +136,7 @@ export class AdministradorService {
   }
 
   eliminarBD() {
-    let datos = JSON.stringify({ accion: 'eliminarSICAS' });
+    let datos = JSON.stringify({ accion: 'eliminarSICAS', cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
@@ -139,7 +145,7 @@ export class AdministradorService {
       'Content-Type',
       'application/json'
     );
-    let datos = JSON.stringify({ accion: 'respaldarSICAS' });
+    let datos = JSON.stringify({ accion: 'respaldarSICAS', cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos, {
       headers: someHeaders,
       responseType: 'blob' as 'json',
@@ -147,7 +153,7 @@ export class AdministradorService {
   }
 
   obtenerProgramas() {
-    let datos = JSON.stringify({ accion: 'recuperarPlanes' });
+    let datos = JSON.stringify({ accion: 'recuperarPlanes', cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
@@ -157,18 +163,20 @@ export class AdministradorService {
       var datos = JSON.stringify({
         accion: 'recuperarEstadisticaPersonal',
         contenido: filtros,
+        cuenta: this.cuenta
       });
     } else {
       var datos = JSON.stringify({
         accion: 'recuperarEstadisticaAlumno',
         contenido: filtros,
+        cuenta: this.cuenta
       });
     }
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
   obtenerRoles() {
-    let datos = JSON.stringify({ accion: 'recuperarRoles' });
+    let datos = JSON.stringify({ accion: 'recuperarRoles', cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
@@ -176,12 +184,13 @@ export class AdministradorService {
     let datos = JSON.stringify({
       accion: 'agregarUsuario',
       contenido: datosUsuario,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
   obtenerPreguntas() {
-    let datos = JSON.stringify({ accion: 'recuperarPreguntas' });
+    let datos = JSON.stringify({ accion: 'recuperarPreguntas', cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
@@ -189,12 +198,13 @@ export class AdministradorService {
     let datos = JSON.stringify({
       accion: 'agregarPregunta',
       contenido: pregunta,
+      cuenta: this.cuenta
     });
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 
   eliminarPregunta(id: any) {
-    let datos = JSON.stringify({ accion: 'eliminarPregunta', contenido: id });
+    let datos = JSON.stringify({ accion: 'eliminarPregunta', contenido: id, cuenta: this.cuenta});
     return this.clienteHttp.post<any>(this.API_Administrador, datos);
   }
 }
