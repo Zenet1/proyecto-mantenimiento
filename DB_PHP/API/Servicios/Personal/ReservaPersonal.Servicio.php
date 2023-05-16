@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 include_once("ReservaPersonal.Query.php");
 
 class ReservaPersonal

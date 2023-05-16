@@ -2,6 +2,7 @@
 include_once("../Clases/Sanitizador.func.php");
 include_once("Autenticacion.Query.php");
 
+
 class Autenticar
 {
     private Query $objQuery;
@@ -72,15 +73,16 @@ class Autenticar
     {
         $incognitas = array("idu" => $datosCuenta["IDUsuario"]);
         $resultado = $this->objQuery->ejecutarConsulta($this->objAunQ->DatosAlumno(), $incognitas);
-
+        
         $nombreCompleto = $resultado[0]["NombreAlumno"] . " ";
         $nombreCompleto .= $resultado[0]["ApellidoPaternoAlumno"] . " ";
         $nombreCompleto .= $resultado[0]["ApellidoMaternoAlumno"];
-
+        
         $_SESSION["Nombre"] = $nombreCompleto;
         $_SESSION["IDAlumno"] = $resultado[0]["IDAlumno"];
         $_SESSION["Matricula"] = $resultado[0]["Matricula"];
         $_SESSION["Correo"] = $resultado[0]["CorreoAlumno"];
+        
     }
 
     private function PersonalDatos(string $sql, array $datosCuenta)

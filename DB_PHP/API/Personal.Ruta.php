@@ -8,7 +8,9 @@ include_once("../Clases/Conexion.Class.php");
 include_once("../Clases/Fechas.Class.php");
 
 
-Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
+$Conexion = Conexion::ConexionInstacia("FMAT");
+Conexion::ReconfigurarConexion("FMAT");
+
 $QueryObj = new Query();
 $QrControl = new GeneradorQr();
 $PersonalControl = new ReservaPersonal($QueryObj, Fechas::ObtenerInstancia());

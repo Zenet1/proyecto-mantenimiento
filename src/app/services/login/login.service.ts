@@ -8,12 +8,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class LoginService {
-  API: string =
-    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Usuarios.Ruta.php';
-  API_Alumnos: string =
-    'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Alumnos.Ruta.php';
-  API_Facultades: string =
+  API_Usuarios: string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Usuarios.Ruta.php';
+  API_Alumnos: string = 'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Alumnos.Ruta.php';
+  /*API_Facultades: string =
     'http://localhost:80/proyecto-mantenimiento/DB_PHP/API/Servicios/Facultades.Servicio.php';
+    */
   redirectUrl: string;
 
   @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
@@ -22,7 +21,8 @@ export class LoginService {
 
   public iniciarSesion(datosCuenta: FormGroup, accionRol: any) {
     var datos = JSON.stringify({ accion: accionRol, cuenta: datosCuenta });
-    this.httpClient.post<any>(this.API, datos).subscribe((Users) => {
+    this.httpClient.post<any>(this.API_Usuarios, datos).subscribe((Users) => {
+      console.log(JSON.stringify(Users));
       if (Users != null && Users != 'Sin cuenta valida') {
         var token = JSON.stringify(Users);
         if (Users.Rol == 'Alumno') {
@@ -72,10 +72,10 @@ export class LoginService {
     });
   }
 
-  obtenerFacultades() {
+  /*obtenerFacultades() {
     let datos = JSON.stringify({ accion: 'recuperarFacultades' });
     return this.httpClient.post<any>(this.API_Facultades, datos);
-  }
+  }¨*/
 
   obtenerConexion() {
     return 'FMAT';

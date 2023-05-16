@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 class ReservacionExterno{
 
     private Query $objQuery;

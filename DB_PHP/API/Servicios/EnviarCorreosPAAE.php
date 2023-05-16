@@ -1,4 +1,5 @@
 <?php
+
 $EmailPath = realpath(dirname(__FILE__, 3) . "/Clases/Email.Class.php");
 $QrPath = realpath(dirname(__FILE__, 3) . "/Clases/Qr.Class.php");
 $QueryPath = realpath(dirname(__FILE__, 3) . "/Clases/Query.Class.php");

@@ -1,9 +1,11 @@
 <?php
-session_start();
+
 $EmailPath = realpath(dirname(__FILE__, 3) . "/Clases/Email.Class.php");
 $QueryPath = realpath(dirname(__FILE__, 3) . "/Clases/Query.Class.php");
+
 include_once($EmailPath);
 include_once($QueryPath);
+
 $QueryControl = new Query();
 $CorreoControl = new CorreoManejador();
 
