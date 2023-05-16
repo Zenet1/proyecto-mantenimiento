@@ -19,6 +19,7 @@ class ReservaPersonal
 
     public function InsertarReserva(array $contenido, GeneradorQr $qr, Conexion $conexion)
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $sql_insertar = "INSERT INTO correos (correo,nombre,asunto,mensaje,contenidoQR,nombreQR,TipoCorreo)SELECT :cor,:nom,:asu,:mes,:con,:noq,:tip FROM DUAL WHERE NOT EXISTS (SELECT correo,TipoCorreo FROM correos WHERE correo=:cor AND TipoCorreo=:tip) LIMIT 1";
 
         $incogInser = array("idp" => $_SESSION["ID"], "fchA" => $this->fecha->FechaAct(), "hrA" => $this->fecha->HrAct(), "fchR" => $this->fecha->FechaSig());
@@ -66,6 +67,7 @@ class ReservaPersonal
 
     public function validarReservaNoExistente(array $contenido)
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $Respuesta = "Aceptado";
         $incognitas = array("idp" => $_SESSION["ID"], "fchR" => $this->fecha->FechaAct());
         $sql = "";

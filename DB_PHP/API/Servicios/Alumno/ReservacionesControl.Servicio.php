@@ -17,6 +17,7 @@ class ReservaControl
 
     public function validarReservaNoExistente()
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $Respuesta = "Aceptado";
         $incognitas = array("ida" => $_SESSION["IDAlumno"], "fchA" => $this->objFecha->FechaAct());
         $Reservaciones = $this->objQuery->ejecutarConsulta($this->objResQuery->ExisteReserva(), $incognitas);
@@ -29,6 +30,7 @@ class ReservaControl
 
     public function obtenerMateriasDisponibles()
     {
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $gruposValidados = array();
         $incognitas = array("ida" => $_SESSION["IDAlumno"], "dia" => $this->objFecha->DiaSig());
         $resultado = $this->objQuery->ejecutarConsulta($this->objResQuery->Grupos(), $incognitas);

@@ -1,8 +1,11 @@
 <?php
-session_start();
+
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+header("Access-Control-Allow-Origin:*");
 include_once("../Clases/Query.Class.php");
 include_once("../Clases/Conexion.Class.php");
 include_once("Servicios/Usuarios/Autenticar.Servicio.php");
+//include_once("Autenticar.Servicio.php");
 
 $jsonUsuario = file_get_contents('php://input');
 $datos = (array) json_decode($jsonUsuario);

@@ -33,10 +33,10 @@ class Autenticar
             
             $CuentaUsuario = array("Cuenta" => $resultado[0]["Cuenta"], "Rol" => $resultado[0]["Rol"], "Conexion" => $contenido["facultad"]);
             echo json_encode($CuentaUsuario);
-            exit();
+
+        }else{
+            echo json_encode("Sin cuenta valida");
         }
-        echo json_encode("Sin cuenta valida");
-        exit();
     }
 
     /**
@@ -78,11 +78,11 @@ class Autenticar
         $nombreCompleto .= $resultado[0]["ApellidoPaternoAlumno"] . " ";
         $nombreCompleto .= $resultado[0]["ApellidoMaternoAlumno"];
         
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $_SESSION["Nombre"] = $nombreCompleto;
         $_SESSION["IDAlumno"] = $resultado[0]["IDAlumno"];
         $_SESSION["Matricula"] = $resultado[0]["Matricula"];
-        $_SESSION["Correo"] = $resultado[0]["CorreoAlumno"];
-        
+        $_SESSION["Correo"] = $resultado[0]["CorreoAlumno"];        
     }
 
     private function PersonalDatos(string $sql, array $datosCuenta)

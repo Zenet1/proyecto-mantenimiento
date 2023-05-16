@@ -12,9 +12,9 @@ class InsertarUsuarioQuery
 
         $this->INSERTUsuario = "INSERT INTO usuarios (Cuenta,Contraseña,IDRol) SELECT :ctn,:pss,:idr FROM DUAL WHERE NOT EXISTS (SELECT Cuenta FROM usuarios WHERE Cuenta=:ctn) LIMIT 1";
 
-        $this->INSERTTrabajador["2"] = "INSERT INTO capturadores (IDUsuario,NombreCapt,ApellidoPaternoCapt, ApellidoMaternoCapt) SELECT :idu,:nm,:app,:apm FROM DUAL WHERE NOT EXISTS (SELECT IDUsuario FROM capturadores WHERE IDUsuario=:idu) LIMIT 1";
+        $this->INSERTTrabajador["2"] = "INSERT INTO capturadores (IDUsuario,NombreCapt) SELECT :idu,:nm FROM DUAL WHERE NOT EXISTS (SELECT IDUsuario FROM capturadores WHERE IDUsuario=:idu) LIMIT 1";
 
-        $this->INSERTTrabajador["3"] = "INSERT INTO administradores (IDUsuario, NombreAdmin, ApellidoPaternoAdmin, ApellidoMaternoAdmin) SELECT :idu,:nm,:app,:apm FROM DUAL WHERE NOT EXISTS (SELECT IDUsuario FROM administradores WHERE IDUsuario=:idu) LIMIT 1";
+        $this->INSERTTrabajador["3"] = "INSERT INTO administradores (IDUsuario, NombreAdmin) SELECT :idu,:nm FROM DUAL WHERE NOT EXISTS (SELECT IDUsuario FROM administradores WHERE IDUsuario=:idu) LIMIT 1";
     }
 
     public function SELECTIDusuarioQuery(): string

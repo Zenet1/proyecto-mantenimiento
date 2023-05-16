@@ -1,5 +1,4 @@
 <?php
-
 include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Administrador/ActualizarPorcentaje.Servicio.php");
 include_once("Servicios/Administrador/ActualizarSalones.Servicio.php");
