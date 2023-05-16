@@ -20,6 +20,8 @@ export class ExternoService {
       accion: 'insertarReservaExterno',
       oficinas: oficinas,
       fecha: fecha,
+      facultad: "FMAT"
+      
     });
     return this.clienteHttp.post<any>(this.API_Externo, datos);
   }
@@ -29,22 +31,23 @@ export class ExternoService {
       accion: 'enviarQRExterno',
       oficinas: oficinas,
       fecha: fecha,
+      facultad: "FMAT"
     });
     return this.clienteHttp.post<any>(this.API_Externo, datos);
   }
 
   obtenerOficinas() {
-    let datos = JSON.stringify({ accion: 'recuperarOficinas' });
+    let datos = JSON.stringify({ accion: 'recuperarOficinas', facultad: 'FMAT'});
     return this.clienteHttp.post<any>(this.API_Oficinas, datos);
   }
 
   guardarExterno(datosExterno: any): Observable<any> {
-    let datos = JSON.stringify({ contenido: datosExterno });
+    let datos = JSON.stringify({ contenido: datosExterno, facultad: 'FMAT'});
     return this.clienteHttp.post<any>(this.API_RegistroExterno, datos);
   }
 
   fechaActual() {
-    let datos = JSON.stringify({ accion: 'FechaActual' });
+    let datos = JSON.stringify({ accion: 'FechaActual', facultad: 'FMAT'});
     return this.clienteHttp.post<any>(this.API_Externo, datos);
   }
 }

@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+header("Access-Control-Allow-Origin:*");
 include_once("../Clases/Sanitizador.func.php");
 include_once("Servicios/Externo/ExternoControl.Servicio.php");
 include_once("Servicios/Externo/ReservacionesExterno.Servicio.php");
@@ -9,6 +10,10 @@ include_once("../Clases/Fechas.Class.php");
 include_once("../Clases/Qr.Class.php");
 include_once("../Clases/Email.Class.php");
 
+if(session_status() !== PHP_SESSION_ACTIVE){
+    session_start();
+}
+
 $json = file_get_contents('php://input');
 $datos = json_decode($json);
 
@@ -17,7 +22,6 @@ Conexion::ReconfigurarConexion($conexion);
 $QueryObj = new Query();
 $QrControl = new GeneradorQr();
 $Fechas = Fechas::ObtenerInstancia();
-
 $ExternoControl = new ExternoControl($QueryObj, $Fechas);
 $ReservacionExterno = new ReservacionExterno($QueryObj, $Fechas);
 

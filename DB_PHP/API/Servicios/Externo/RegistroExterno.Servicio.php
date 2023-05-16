@@ -4,11 +4,11 @@ class RegistroExterno{
     public function inicializarSesionExterno($datos)
     {
         session_start();
-        $_SESSION['Nombre'] = "$datos->nombre";
-        $_SESSION['ApellidosExterno'] = "$datos->apellidos";
-        $_SESSION['Empresa'] = "$datos->empresa";
-        $_SESSION['Correo'] = "$datos->correo";
-        $_SESSION['Conexion'] = "$datos->facultad";
+        $_SESSION['Nombre'] = $datos->contenido->nombre;
+        $_SESSION['ApellidosExterno'] = $datos->contenido->apellidos;
+        $_SESSION['Empresa'] = $datos->contenido->empresa;
+        $_SESSION['Correo'] = $datos->contenido->correo;
+        $_SESSION['Conexion'] = $datos->facultad;
     }
 }
 ?>
