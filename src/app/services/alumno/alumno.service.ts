@@ -16,27 +16,30 @@ export class AlumnoService {
   }
 
   enviarAsistencia(datosClases: any): Observable<any> {
-    let datos = JSON.stringify({
+    let datosAlumno = JSON.stringify({
       accion: 'insertarReservas',
       contenido: datosClases,
       cuenta: this.cuenta,
+      conexion: "FMAT"
     });
-    return this.clienteHttp.post<any>(this.API_Alumnos, datos);
+    return this.clienteHttp.post<any>(this.API_Alumnos, datosAlumno);
   }
 
   obtenerClases() {
-    let datos = JSON.stringify({
+    let datosAlumno = JSON.stringify({
       accion: 'obtenerClases',
       cuenta: this.cuenta,
+      conexion: "FMAT"
     });
-    return this.clienteHttp.post<any>(this.API_Alumnos, datos);
+    return this.clienteHttp.post<any>(this.API_Alumnos, datosAlumno);
   }
 
   combrobarReservacion() {
-    let datos = JSON.stringify({
+    let datosAlumno = JSON.stringify({
       accion: 'validacionReservas',
       cuenta: this.cuenta,
+      conexion: "FMAT"
     });
-    return this.clienteHttp.post(this.API_Alumnos, datos);
+    return this.clienteHttp.post(this.API_Alumnos, datosAlumno);
   }
 }
