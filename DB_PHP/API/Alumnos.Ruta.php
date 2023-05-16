@@ -1,4 +1,6 @@
 <?php
+
+header("Access-Control-Allow-Origin:*");
 include_once("Servicios/Alumno/ReservacionesControl.Servicio.php");
 include_once("Servicios/Alumno/AlumnoControl.Servicio.php");
 include_once("../Clases/Query.Class.php");
@@ -8,13 +10,16 @@ include_once("../Clases/Qr.Class.php");
 include_once("../Clases/Email.Class.php");
 
 $json = file_get_contents('php://input');
-$datos = json_decode($json);
+$datosAlumno = json_decode($json);
 
-session_id($datos->cuenta);
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE){
+    session_id($datosAlumno->cuenta);
+    session_start();
+}
 
 
-Conexion::ReconfigurarConexion($_SESSION["Conexion"]);
+
+Conexion::ReconfigurarConexion($datosAlumno->conexion);
 $Fechas = Fechas::ObtenerInstancia();
 $QrControl = new APIQR();
 $Query = new Query();
@@ -22,7 +27,7 @@ $Query = new Query();
 $ReservacionesControl = new ReservaControl($Query, $Fechas);
 $AlumnosControl = new AlumnoControl($Query, $Fechas);
 
-switch ($datos->accion) {
+switch ($datosAlumno->accion) {
     case "validacionReservas":
         $ReservacionesControl->validarReservaNoExistente();
         break;
@@ -30,7 +35,7 @@ switch ($datos->accion) {
         $ReservacionesControl->obtenerMateriasDisponibles();
         break;
     case "insertarReservas":
-        $materias = $ReservacionesControl->insertarReservasAlumno((array)$datos->contenido);
+        $materias = $ReservacionesControl->insertarReservasAlumno($datos->contenido);
         Conexion::ReconfigurarConexion("CAMPUS");
         $AlumnosControl->EnviarQRCorreo($materias, $QrControl, Conexion::ConexionInstacia("CAMPUS"));
         break;

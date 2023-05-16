@@ -20,19 +20,18 @@ export class LoginService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   public iniciarSesion(datosCuenta: FormGroup, accionRol: any) {
-    var datos = JSON.stringify({ accion: accionRol, cuenta: datosCuenta });
+    var datos = JSON.stringify({ accion: accionRol, cuenta: datosCuenta, facultad: "FMAT"});
     this.httpClient.post<any>(this.API_Usuarios, datos).subscribe((Users) => {
-      console.log(JSON.stringify(Users));
       if (Users != null && Users != 'Sin cuenta valida') {
         var token = JSON.stringify(Users);
         if (Users.Rol == 'Alumno') {
-          var accion = JSON.stringify({
-            accion: 'comprobarSuspension',
+          var datosAlumno = JSON.stringify({
+            accion: "comprobarSuspension",
             cuenta: Users.Cuenta,
-            conexion: Users.Conexion,
+            conexion: Users.Conexion
           });
           this.httpClient
-            .post<any>(this.API_Alumnos, accion)
+            .post<any>(this.API_Alumnos, datosAlumno)
             .subscribe((respuesta) => {
               if (respuesta.length != 0) {
                 alert(

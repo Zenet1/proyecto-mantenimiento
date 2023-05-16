@@ -18,20 +18,21 @@ class Autenticar
  * @param array $contenido Contiene la informacion para validar una cuenta de usuario {usuario, contrasena}
  * @return string Si cuenta con una cuenta, devolvera una objeto en cadena (json_encode), de lo contrario, devulve una cadena con una advertencia
  */
-    public function ValidarCuenta(array $contenido)
+    public function ValidarCuenta(array $contenido, string $facultad)
     {
-        session_id($contenido["usuario"]);
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE){
+            session_id($contenido["usuario"]);
+            session_start();
+        }
 
         $incognitas = array("ctn" => Sanitizar($contenido["usuario"]), "pss" => Sanitizar($contenido["contrasena"]) );
         $resultado = $this->objQuery->ejecutarConsulta($this->objAunQ->VerificarLocal(), $incognitas);
 
-        //print_r($contenido);
         if (sizeof($resultado) !== 0) {
             $this->ObtenerDatosPorRol($resultado[0]);
-            $_SESSION["Conexion"] = $contenido["facultad"];
+            $_SESSION["Conexion"] = $facultad;
             
-            $CuentaUsuario = array("Cuenta" => $resultado[0]["Cuenta"], "Rol" => $resultado[0]["Rol"], "Conexion" => $contenido["facultad"]);
+            $CuentaUsuario = array("Cuenta" => $resultado[0]["Cuenta"], "Rol" => $resultado[0]["Rol"], "Conexion" => $facultad);
             echo json_encode($CuentaUsuario);
 
         }else{
