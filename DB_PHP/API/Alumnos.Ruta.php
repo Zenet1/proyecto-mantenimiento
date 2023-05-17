@@ -12,12 +12,10 @@ include_once("../Clases/Email.Class.php");
 $json = file_get_contents('php://input');
 $datosAlumno = json_decode($json);
 
-if(session_status() !== PHP_SESSION_ACTIVE){
+if (session_status() !== PHP_SESSION_ACTIVE) {
     session_id($datosAlumno->cuenta);
     session_start();
 }
-
-
 
 Conexion::ReconfigurarConexion($datosAlumno->conexion);
 $Fechas = Fechas::ObtenerInstancia();
@@ -35,7 +33,7 @@ switch ($datosAlumno->accion) {
         $ReservacionesControl->obtenerMateriasDisponibles();
         break;
     case "insertarReservas":
-        $materias = $ReservacionesControl->insertarReservasAlumno($datos->contenido);
+        $materias = $ReservacionesControl->insertarReservasAlumno($datosAlumno->contenido);
         Conexion::ReconfigurarConexion("CAMPUS");
         $AlumnosControl->EnviarQRCorreo($materias, $QrControl, Conexion::ConexionInstacia("CAMPUS"));
         break;
