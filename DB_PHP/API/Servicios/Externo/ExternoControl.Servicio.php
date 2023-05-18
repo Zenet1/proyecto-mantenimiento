@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 class ExternoControl
 {
 
@@ -19,23 +17,28 @@ class ExternoControl
         if ($this->sesionActivaExterno()) {
             $sql_insertar = "INSERT INTO correos (correo,nombre,asunto,mensaje,contenidoQR,nombreQR,TipoCorreo)SELECT :cor,:nom,:asu,:mes,:con,:noq,:tip FROM DUAL WHERE NOT EXISTS (SELECT correo,TipoCorreo FROM correos WHERE correo=:cor AND TipoCorreo=:tip) LIMIT 1";
 
+
+
+
             $objCorreo = new CorreoManejador();
             $datosSesion = $this->recuperarVariablesSesion();
 
-if(!CorreoValidacion($datosSesion["correoExterno"])){
-    header("HTTP/1.0 404 Correo invalido");
-    return;
-}
+            if (!CorreoValidacion($datosSesion["correoExterno"])) {
+                header("HTTP/1.0 404 Correo invalido");
+                return;
+            }
 
             $datosDestinatario = array($datosSesion["correoExterno"] => $datosSesion["nombreExterno"]);
 
             $contenidoCorreo = $this->generarContenidoCorreo($datosSesion["nombreExterno"], $IDOficinas, $datosSesion["fechaReservada"]);
 
             $nombreQR = $this->generarQRExterno($datosSesion["IDExterno"], $datosSesion["siglasFacultad"], $IDOficinas, $datosSesion["fechaReservada"], $datosSesion["fechaCuandoSeReservo"], $datosSesion["horaCuandoSeReservo"], $qr);
-            
+
             $ubicacionQR = dirname(__FILE__, 3) . "/img/" . $nombreQR[0] . ".png";
 
-            $datosQr = array("noq" => $ubicacionQR, "con" => $nombreQR[1], "mes" => $contenidoCorreo[1], "cor" => $_SESSION["Correo"], "nom" => $_SESSION["Nombre"], "asu" => $contenidoCorreo[0], "tip"=> "PAAE");
+            $datosQr = array("noq" => $ubicacionQR, "con" => $nombreQR[1], "mes" => $contenidoCorreo[1], "cor" => $_SESSION["Correo"], "nom" => $_SESSION["Nombre"], "asu" => $contenidoCorreo[0], "tip" => "PAAE");
+
+
 
             $conexion::ReconfigurarConexion("CAMPUS");
             $conexion::ConexionInstacia("CAMPUS");
@@ -48,7 +51,7 @@ if(!CorreoValidacion($datosSesion["correoExterno"])){
     private function generarContenidoCorreo(string $nombreExterno, array $listaOficinas, string $fechaReservada): array
     {
         $asunto = "Clave QR para acceso";
-        $mensaje = "Estimado " .  $nombreExterno . ", el siguiente correo electrónico contiene su clave única (QR) para acceder";
+        $mensaje = "Estimado " . $nombreExterno . ", el siguiente correo electrónico contiene su clave única (QR) para acceder";
         $mensaje .= " a su entidad educativa correspondiente, este código es únicamente válido en la fecha " . $fechaReservada . ".\n";
 
         $mensaje .= "<br>Usted ha podido realizar reservaciones con éxito a las siguientes oficinas:<br><br>";
@@ -109,7 +112,8 @@ if(!CorreoValidacion($datosSesion["correoExterno"])){
 
     private function recuperarVariablesSesion()
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+        if (session_status() !== PHP_SESSION_ACTIVE)
+            session_start();
         $IDExterno = $_SESSION["IDExterno"];
         $correoExterno = $_SESSION["Correo"];
         $nombreExterno = $_SESSION["Nombre"] . " " . $_SESSION["ApellidosExterno"];
